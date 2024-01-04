@@ -10,5 +10,5 @@ dependencies:
     repository: "https://github.com/DuncanBoutet/boutet_duncan_continu_2023/tree/multi_chart/fastapi/charts/cast-service" # Remplacez par l'URL du référentiel de cast-service
 
   - name: movie-service
-    version: """  # Remplacez par la version appropriée de movie-service
+    version: "*"  # Remplacez par la version appropriée de movie-service
     repository: "https://github.com/DuncanBoutet/boutet_duncan_continu_2023/tree/multi_chart/fastapi/charts/movie-service" # Remplacez par l'URL du référentiel de movie-service
