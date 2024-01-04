@@ -12,7 +12,7 @@ stages {
                 script {
                 sh '''
                  docker rm -f jenkins
-                 docker build -t $DOCKER_ID/$DOCKER_IMAGE_MOVIE_SERVICE:$DOCKER_TAG -f ./movie-service/Dockerfile .
+                 docker build -t $DOCKER_ID/$DOCKER_IMAGE_MOVIE_SERVICE:$DOCKER_TAG -f ./movie-service/Dockerfile ./movie-service
                 sleep 6
                 '''
                 }
@@ -60,7 +60,7 @@ stages {
                 script {
                 sh '''
                  docker rm -f jenkins
-                 docker build -t $DOCKER_ID/$DOCKER_IMAGE_CAST_SERVICE:$DOCKER_TAG -f ./cast-service/Dockerfile .
+                 docker build -t $DOCKER_ID/$DOCKER_IMAGE_CAST_SERVICE:$DOCKER_TAG -f ./cast-service/Dockerfile ./cast-service
                 sleep 6
                 '''
                 }
