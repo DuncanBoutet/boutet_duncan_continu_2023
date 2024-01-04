@@ -182,7 +182,7 @@ stage('Deploiement en prod') {
     }
     steps {
         script {
-            if (env.BRANCH_NAME == 'master') {
+            if (env.GIT_BRANCH == 'origin/master') {
                 // Create an Approval Button with a timeout of 15 minutes.
                 // This requires a manual validation in order to deploy on the production environment
                 timeout(time: 15, unit: "MINUTES") {
