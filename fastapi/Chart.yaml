@@ -1,5 +1,5 @@
+# fastapi/Chart.yaml
 apiVersion: v2
 name: fastapi
-description: A Helm chart for deploying the FastAPI application
+description: Helm Chart for the FastAPI project
 version: 0.1.0
-appVersion: 1.0.0

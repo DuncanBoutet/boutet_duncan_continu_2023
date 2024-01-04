@@ -1,8 +1,0 @@
-metadata:
-    name: cast-service
-image:
-  repository: boudun/cast-service
-  tag: latest
-
-postgres:
-  database_uri: "postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev"
