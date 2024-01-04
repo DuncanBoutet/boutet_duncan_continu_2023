@@ -7,10 +7,12 @@ DOCKER_TAG = "v.${BUILD_ID}.0" // we will tag our images with the current build 
 }
 agent any // Jenkins will be able to select all available agents
 stages {
-        stage('Print Branch Name') {
+        stage('Print Git Info') {
             steps {
                 script {
-                    echo "Current branch is ${env.BRANCH_NAME}"
+                    echo "GIT_COMMIT: ${env.GIT_COMMIT}"
+                    echo "GIT_BRANCH: ${env.GIT_BRANCH}"
+                    echo "BRANCH_NAME: ${env.BRANCH_NAME}"
                 }
             }
         }
