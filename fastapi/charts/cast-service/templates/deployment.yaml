@@ -26,14 +26,26 @@ spec:
           mountPath: /app/
 
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cast-service-volume-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "./cast-service/"
+  claimRef:
+    name: cast-service-volume
+
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cast-service-volume
 spec:
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "./cast-service/"
   resources:
     requests:
       storage: 1Gi

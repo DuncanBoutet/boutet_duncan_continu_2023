@@ -28,6 +28,20 @@ spec:
           mountPath: /app/
 
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: movie-service-volume-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "./movie-service/"
+  claimRef:
+    name: movie-service-volume
+
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: movie-service-volume
