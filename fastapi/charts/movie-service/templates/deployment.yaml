@@ -49,7 +49,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "./movie-service/"
   resources:
     requests:
       storage: 1Gi
