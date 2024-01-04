@@ -1,0 +1,24 @@
+# cast-service-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cast-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cast-service
+  template:
+    metadata:
+      labels:
+        app: cast-service
+    spec:
+      containers:
+      - name: cast-service
+        image: boudun/cast-service:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URI
+          value: "postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev"
+      # Ajoutez des volumes, des volumes montés, des variables d'environnement supplémentaires au besoin

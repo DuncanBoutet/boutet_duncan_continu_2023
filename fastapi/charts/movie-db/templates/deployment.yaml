@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "movie-db.fullname" . }}
+  labels:
+    {{- include "movie-db.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "movie-db.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "movie-db.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: movie-db
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: POSTGRES_USER
+              value: "{{ .Values.postgres.user }}"
+            - name: POSTGRES_PASSWORD
+              value: "{{ .Values.postgres.password }}"
+            - name: POSTGRES_DB
+              value: "{{ .Values.postgres.database }}"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: {{ .Values.volume.name }}
+              mountPath: /var/lib/postgresql/data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "movie-db.fullname" . }}
+  labels:
+    {{- include "movie-db.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "movie-db.selectorLabels" . | nindent 6 }}
+  ports:
+    - port: 5432
+      targetPort: 5432

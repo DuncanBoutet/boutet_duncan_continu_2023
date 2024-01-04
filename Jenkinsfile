@@ -139,7 +139,7 @@ stage('Deploiement en QA'){
                 cp fastapi/values.yaml values.yml
                 cat values.yml
                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app fastapi --values=values.yml --namespace QA
+                helm upgrade --install app fastapi --values=values.yml --namespace qa
                 '''
                 }
             }
@@ -166,31 +166,36 @@ stage('Deploiement en staging'){
             }
 
         }
-  stage('Deploiement en prod'){
-        environment
-        {
-        KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
-        }
-            steps {
-            // Create an Approval Button with a timeout of 15minutes.
-            // this require a manuel validation in order to deploy on production environment
-                    timeout(time: 15, unit: "MINUTES") {
-                        input message: 'Do you want to deploy in production ?', ok: 'Yes'
-                    }
-
-                script {
-                sh '''
-                rm -Rf .kube
-                mkdir .kube
-                ls
-                cat $KUBECONFIG > .kube/config
-                cp fastapi/values.yaml values.yml
-                cat values.yml
-                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                helm upgrade --install app fastapi --values=values.yml --namespace prod
-                '''
+stage('Deploiement en prod') {
+    environment {
+        KUBECONFIG = credentials("config") // we retrieve kubeconfig from secret file called config saved on Jenkins
+    }
+    steps {
+        script {
+            if (env.BRANCH_NAME == 'master') {
+                // Create an Approval Button with a timeout of 15 minutes.
+                // This requires a manual validation in order to deploy on the production environment
+                timeout(time: 15, unit: "MINUTES") {
+                    input message: 'Do you want to deploy in production ?', ok: 'Yes'
                 }
+
+                // Perform deployment steps for production
+                sh '''
+                    rm -Rf .kube
+                    mkdir .kube
+                    ls
+                    cat $KUBECONFIG > .kube/config
+                    cp fastapi/values.yaml values.yml
+                    cat values.yml
+                    sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+                    helm upgrade --install app fastapi --values=values.yml --namespace prod
+                '''
+            } else {
+                echo 'Skipping deployment to production as the branch is not master.'
             }
         }
+    }
+}
+
 }
 }

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: movie-db
+description: A Helm chart for deploying movie database
+version: 0.1.0
