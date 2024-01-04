@@ -1,25 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cast-service.fullname" . }}
+  name: {{ .Values.metadata.name }}
   labels:
-    {{- include "cast-service.labels" . | nindent 4 }}
+    {{ .Values.metadata.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "cast-service.selectorLabels" . | nindent 6 }}
+      {{ .Values.metadata.name }}
   template:
     metadata:
       labels:
-        {{- include "cast-service.selectorLabels" . | nindent 8 }}
+        {{ .Values.metadata.name }}
     spec:
       containers:
-        - name: cast-service
+        - name: {{ .Values.metadata.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: 8000
           env:
             - name: DATABASE_URI
               value: "{{ .Values.postgres.database_uri }}"
-          # Ajoutez des volumes, des volumes montés, des variables d'environnement supplémentaires au besoin

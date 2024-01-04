@@ -1,4 +1,5 @@
-# Customize values for movie-service
+metadata:
+    name: movie-service
 image:
   repository: boudun/movie-service
   tag: latest

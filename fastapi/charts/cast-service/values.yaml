@@ -1,4 +1,5 @@
-# Customize values for cast-service
+metadata:
+    name: cast-service
 image:
   repository: boudun/cast-service
   tag: latest
