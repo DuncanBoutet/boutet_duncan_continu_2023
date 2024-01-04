@@ -24,3 +24,17 @@ spec:
           value: {{ .Values.movieDB.database }}
         ports:
         - containerPort: 5432
+        volumeMounts:
+        - name: postgres-data-movie
+          mountPath: /var/lib/postgresql/data
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-movie
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi  # Ajustez la capacité selon vos besoins

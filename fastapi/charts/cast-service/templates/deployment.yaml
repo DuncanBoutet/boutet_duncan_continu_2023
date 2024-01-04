@@ -24,3 +24,16 @@ spec:
         volumeMounts:
         - name: cast-service-volume
           mountPath: /app/
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cast-service-volume
+spec:
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "./cast-service/"
+  resources:
+    requests:
+      storage: 1Gi
