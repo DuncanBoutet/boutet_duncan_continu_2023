@@ -10,7 +10,6 @@ stages {
         stage('Print Git Info') {
             steps {
                 script {
-                    echo "GIT_COMMIT: ${env.GIT_COMMIT}"
                     echo "GIT_BRANCH: ${env.GIT_BRANCH}"
                     echo "BRANCH_NAME: ${env.BRANCH_NAME}"
                 }
