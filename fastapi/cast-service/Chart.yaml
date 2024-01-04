@@ -1,5 +1,0 @@
-# mon_projet_helm/cast-service/Chart.yaml
-apiVersion: v2
-name: cast-service
-description: Chart for the cast service
-version: 0.1.0

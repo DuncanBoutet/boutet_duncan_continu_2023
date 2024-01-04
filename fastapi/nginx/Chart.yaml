@@ -1,5 +1,0 @@
-# mon_projet_helm/nginx/Chart.yaml
-apiVersion: v2
-name: nginx
-description: Chart for the Nginx service
-version: 0.1.0

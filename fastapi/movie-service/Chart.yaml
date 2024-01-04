@@ -1,5 +1,0 @@
-# mon_projet_helm/movie-service/Chart.yaml
-apiVersion: v2
-name: movie-service
-description: Chart for the movie service
-version: 0.1.0
