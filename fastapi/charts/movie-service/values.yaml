@@ -1,0 +1,10 @@
+# Customize values for movie-service
+image:
+  repository: boudun/movie-service
+  tag: latest
+
+postgres:
+  database_uri: "postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev"
+
+castService:
+  hostUrl: "http://cast-service:8000/api/v1/casts/"

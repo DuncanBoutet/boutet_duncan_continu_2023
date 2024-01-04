@@ -1,14 +1,14 @@
-# movie-service-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: movie-service
+  name: {{ include "movie-service.fullname" . }}
+  labels:
+    {{- include "movie-service.labels" . | nindent 4 }}
 spec:
   selector:
-    app: movie-service
+    {{- include "movie-service.selectorLabels" . | nindent 6 }}
   ports:
     - protocol: TCP
       port: 8000
-      targetPort: 8001
+      targetPort: 8000
   type: ClusterIP
-  

@@ -1,26 +1,26 @@
-# movie-service-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: movie-service
+  name: {{ include "movie-service.fullname" . }}
+  labels:
+    {{- include "movie-service.labels" . | nindent 4 }}
 spec:
-  replicas: 1 # Nombre de répliques
+  replicas: 1
   selector:
     matchLabels:
-      app: movie-service
+      {{- include "movie-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: movie-service
+        {{- include "movie-service.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: movie-service
-        image: boudun/movie-service:latest
-        ports:
-        - containerPort: 8000
-        env:
-        - name: DATABASE_URI
-          value: "postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev"
-        - name: CAST_SERVICE_HOST_URL
-          value: "http://cast_service:8000/api/v1/casts/"
-      # Ajoutez des volumes, des volumes montés, des variables d'environnement supplémentaires au besoin
+        - name: movie-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URI
+              value: "{{ .Values.postgres.database_uri }}"
+            - name: CAST_SERVICE_HOST_URL
+              value: "{{ .Values.castService.hostUrl }}"

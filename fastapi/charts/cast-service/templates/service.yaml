@@ -1,11 +1,12 @@
-# cast-service-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: cast-service
+  name: {{ include "cast-service.fullname" . }}
+  labels:
+    {{- include "cast-service.labels" . | nindent 4 }}
 spec:
   selector:
-    app: cast-service
+    {{- include "cast-service.selectorLabels" . | nindent 6 }}
   ports:
     - protocol: TCP
       port: 8000

@@ -1,24 +1,25 @@
-# cast-service-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cast-service
+  name: {{ include "cast-service.fullname" . }}
+  labels:
+    {{- include "cast-service.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cast-service
+      {{- include "cast-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: cast-service
+        {{- include "cast-service.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: cast-service
-        image: boudun/cast-service:latest
-        ports:
-        - containerPort: 8000
-        env:
-        - name: DATABASE_URI
-          value: "postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev"
-      # Ajoutez des volumes, des volumes montés, des variables d'environnement supplémentaires au besoin
+        - name: cast-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URI
+              value: "{{ .Values.postgres.database_uri }}"
+          # Ajoutez des volumes, des volumes montés, des variables d'environnement supplémentaires au besoin
