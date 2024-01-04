@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "movie-service.fullname" . }}
+  name: {{ .Values.metadata.name }}
   labels:
-    {{- include "movie-service.labels" . | nindent 4 }}
+    {{ .Values.metadata.name }}
 spec:
   selector:
-    {{- include "movie-service.selectorLabels" . | nindent 6 }}
+    {{ .Values.metadata.name }}
   ports:
     - protocol: TCP
       port: 8000
-      targetPort: 8000
+      targetPort: 8001
   type: ClusterIP
