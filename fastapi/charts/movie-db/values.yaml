@@ -1,4 +1,5 @@
-# Customize values for movie-db
+metadata:
+    name: movie-db
 image:
   repository: postgres
   tag: 12.1-alpine

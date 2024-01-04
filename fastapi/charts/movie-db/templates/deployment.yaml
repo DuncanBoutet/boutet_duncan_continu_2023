@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "movie-db.fullname" . }}
+  name: {{ .Values.metadata.name }}
   labels:
-    {{- include "movie-db.labels" . | nindent 4 }}
+    {{ .Values.metadata.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "movie-db.selectorLabels" . | nindent 6 }}
+      {{ .Values.metadata.name }}
   template:
     metadata:
       labels:
-        {{- include "movie-db.selectorLabels" . | nindent 8 }}
+        {{ .Values.metadata.name }}
     spec:
       containers:
-        - name: movie-db
+        - name: {{ .Values.metadata.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           env:
             - name: POSTGRES_USER
@@ -33,12 +33,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "movie-db.fullname" . }}
+  name: {{ .Values.metadata.name }}
   labels:
-    {{- include "movie-db.labels" . | nindent 4 }}
+    {{ .Values.metadata.name }}
 spec:
   selector:
-    {{- include "movie-db.selectorLabels" . | nindent 6 }}
+    {{ .Values.metadata.name }}
   ports:
     - port: 5432
       targetPort: 5432

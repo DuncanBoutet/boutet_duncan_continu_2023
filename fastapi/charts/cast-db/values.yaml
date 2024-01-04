@@ -1,4 +1,5 @@
-# Customize values for cast-db
+metadata:
+    name: cast-db
 image:
   repository: postgres
   tag: 12.1-alpine
