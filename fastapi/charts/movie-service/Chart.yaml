@@ -22,3 +22,7 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
+dependencies:
+  - name: cast-db
+    version: "*"  # Remplacez par la version appropriée de cast-service
+    repository: https://github.com/DuncanBoutet/boutet_duncan_continu_2023/tree/multi_chart/fastapi/charts/movie-service/charts/movie-db
