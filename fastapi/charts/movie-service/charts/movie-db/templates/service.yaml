@@ -1,15 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "movie-db.fullname" . }}
-  labels:
-    {{- include "movie-db.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}-movie-db-service
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
   selector:
-    {{- include "movie-db.selectorLabels" . | nindent 4 }}
+    app: {{ .Release.Name }}-movie-db
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432

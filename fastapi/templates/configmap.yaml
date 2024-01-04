@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-nginx-configmap
+data:
+  default.conf: |
+    # Contenu de votre fichier nginx_config.conf
