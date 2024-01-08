@@ -1,6 +1,6 @@
 movieService:
   image:
-    repository: "your-docker-image-repo/movie-service"
+    repository: "boudun/movie-service"
     tag: "latest"
   host: "0.0.0.0"
   port: 8001
