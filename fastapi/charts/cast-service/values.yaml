@@ -1,6 +1,6 @@
 castService:
   image:
-    repository: "your-docker-image-repo/cast-service"
+    repository: "boudun/cast-service"
     tag: "latest"
   host: "0.0.0.0"
   port: 8002
